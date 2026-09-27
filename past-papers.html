@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Tracker - Past Papers</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .trade-section { background: white; padding: 25px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 30px; border-left: 6px solid #0f172a; }
+        .trade-section h2 { color: #0f172a; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 15px; font-size: 20px; }
+        .paper-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+        .paper-card { background: #f8fafc; padding: 20px; border-radius: 8px; border: 1px solid #e2e8f0; }
+        .btn-download { display: inline-block; background: #0f172a; color: white; padding: 8px 15px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px; transition: 0.3s; cursor: pointer; font-size: 14px; }
+        .btn-download:hover { background: #38bdf8; }
+        .trade-SWD { border-left-color: #38bdf8; }
+        .trade-CSA { border-left-color: #a855f7; }
+        .trade-Tourism { border-left-color: #f59e0b; }
+        .trade-Accounting { border-left-color: #10b981; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🚀 AcademicTracker</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="students.html">Abanyeshuri</a></li>
+            <li><a href="marks.html">Amanota</a></li>
+            <li><a href="report-cards.html">Indangamanota</a></li>
+            <li><a href="past-papers.html" class="active">Past Papers</a></li>
+            <li><a href="announcements.html">Amatangazo</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="main-header">
+            <h1>RTB Past National Exams Hub</h1>
+            <p>Ubusitani bw'ibizamini bya Leta (Grouped directly by Trade).</p>
+        </header>
+
+        <!-- Uruhande rw'Umwarimu -->
+        <section class="form-section">
+            <h2>Uruhande rw'Umwarimu (Upload Exam)</h2>
+            <form id="paper-form" style="margin-top: 15px;">
+                <div class="form-group">
+                    <label for="paper-title">Izina ry'Ikizamini / Isomo</label>
+                    <input type="text" id="paper-title" placeholder="Ugereranyije: JavaScript Programming 2024" required>
+                </div>
+                <div class="form-group">
+                    <label for="paper-trade">Ishami (Trade)</label>
+                    <select id="paper-trade" required>
+                        <option value="">-- Hitamo Ishami --</option>
+                        <option value="SWD">Software Development (SWD)</option>
+                        <option value="CSA">Computer Systems & Architecture (CSA)</option>
+                        <option value="Tourism">Tourism Operations (Tourism)</option>
+                        <option value="Accounting">Accounting & Finance (Accounting)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="paper-year">Umwaka cyacyorewemo</label>
+                    <input type="number" id="paper-year" min="2010" max="2026" placeholder="2024" required>
+                </div>
+                <div class="form-group">
+                    <label for="paper-file">Hitamo Ifile y'Ikizamini (PDF, PNG, JPG)</label>
+                    <input type="file" id="paper-file" accept=".pdf, .png, .jpg, .jpeg" required>
+                </div>
+                <button type="submit" class="btn-submit" style="background:#3b82f6;">Shyiraho Ikizamini (Upload)</button>
+            </form>
+        </section>
+
+        <!-- Urutonde rw'amashami -->
+        <section style="margin-top: 30px;">
+            <div class="trade-section trade-SWD">
+                <h2>💻 Software Development (SWD) Papers</h2>
+                <div class="paper-grid" id="container-SWD"></div>
+            </div>
+
+            <div class="trade-section trade-CSA">
+                <h2>⚙️ Computer Systems & Architecture (CSA) Papers</h2>
+                <div class="paper-grid" id="container-CSA"></div>
+            </div>
+
+            <div class="trade-section trade-Tourism">
+                <h2>🌍 Tourism Operations (Tourism) Papers</h2>
+                <div class="paper-grid" id="container-Tourism"></div>
+            </div>
+
+            <div class="trade-section trade-Accounting">
+                <h2>📊 Accounting & Finance (Accounting) Papers</h2>
+                <div class="paper-grid" id="container-Accounting"></div>
+            </div>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="papers.js"></script>
+</body>
+</html>

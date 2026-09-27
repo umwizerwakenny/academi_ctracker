@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Tracker - Indangamanota Viewer</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Gushyiraho Library yo gukora PDF mu buryo bworoshye -->
+    <script src="https://cloudflare.com"></script>
+    <style>
+        .trade-menu { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+        .trade-btn { background: #1e293b; color: #cbd5e1; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .trade-btn:hover { background: #334155; color: white; }
+        .trade-btn.active-trade { background: #3b82f6; color: white; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+        
+        .level-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .level-title { background: #0f172a; color: white; padding: 10px 15px; border-radius: 6px; font-size: 18px; margin-bottom: 15px; }
+        
+        .student-link { color: #3b82f6; font-weight: bold; cursor: pointer; text-decoration: underline; }
+        .student-link:hover { color: #2563eb; }
+
+        /* Imisusire y'Indangamanota Nyizina (Report Card Box) */
+        .report-card-wrapper { display: none; margin-top: 30px; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border-top: 8px solid #0f172a; }
+        #report-pdf-area { padding: 20px; background: white; }
+        .report-header { text-align: center; margin-bottom: 25px; border-bottom: 2px dashed #cbd5e1; padding-bottom: 15px; }
+        .report-meta { display: flex; justify-content: space-between; margin-bottom: 20px; font-size: 16px; background: #f8fafc; padding: 15px; border-radius: 6px; }
+        .btn-pdf { background: #10b981; color: white; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; border-radius: 6px; cursor: pointer; display: block; margin: 20px auto 0 auto; transition: 0.3s; }
+        .btn-pdf:hover { background: #059669; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🚀 AcademicTracker</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="students.html">Abanyeshuri</a></li>
+            <li><a href="marks.html">Amanota</a></li>
+            <li><a href="report-cards.html" class="active">Indangamanota</a></li>
+            <li><a href="past-papers.html">Past Papers</a></li>
+            <li><a href="announcements.html">Amatangazo</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="main-header">
+            <h1>Urutonde n'Indangamanota z'Abanyeshuri</h1>
+            <p>Hitamo Trade mbanziriza ubonereho abanyeshuri bose batondetse kuva ku wa mbere (Ranked) muri buri Level. Kanda ku izina ryo kureba no gukura (Download) indangamanota.</p>
+        </header>
+
+        <!-- 1. Menu y'Amashami (Trade Tabs) -->
+        <div class="trade-menu">
+            <button class="trade-btn" onclick="viewTradeReports('SOD')">💻 Software Development (SOD)</button>
+            <button class="trade-btn" onclick="viewTradeReports('TOR')">🌍 Tourism Operations (TOR)</button>
+            <button class="trade-btn" onclick="viewTradeReports('CSA')">⚙️ Systems Architecture (CSA)</button>
+            <button class="trade-btn" onclick="viewTradeReports('ACC')">📊 Accounting (ACC)</button>
+        </div>
+
+        <!-- 2. Agace k'Urutonde rw'Abanyeshuri (Dynamic Lists per Level) -->
+        <div id="lists-area" style="display: none;">
+            <!-- Level 3 Section -->
+            <div class="level-container">
+                <div class="level-title">🎓 Level 3 (S4) - Urutonde rw'Abanyeshuri (Ranked)</div>
+                <table class="styled-table">
+                    <thead>
+                        <tr><th># Mwanya</th><th>Izina Ryombi</th><th>Impuzandengo (Average)</th><th>Umwanzuro</th></tr>
+                    </thead>
+                    <tbody id="table-L3"></tbody>
+                </table>
+            </div>
+
+            <!-- Level 4 Section -->
+            <div class="level-container">
+                <div class="level-title">🎓 Level 4 (S5) - Urutonde rw'Abanyeshuri (Ranked)</div>
+                <table class="styled-table">
+                    <thead>
+                        <tr><th># Mwanya</th><th>Izina Ryombi</th><th>Impuzandengo (Average)</th><th>Umwanzuro</th></tr>
+                    </thead>
+                    <tbody id="table-L4"></tbody>
+                </table>
+            </div>
+
+            <!-- Level 5 Section -->
+            <div class="level-container">
+                <div class="level-title">🎓 Level 5 (S6) - Urutonde rw'Abanyeshuri (Ranked)</div>
+                <table class="styled-table">
+                    <thead>
+                        <tr><th># Mwanya</th><th>Izina Ryombi</th><th>Impuzandengo (Average)</th><th>Umwanzuro</th></tr>
+                    </thead>
+                    <tbody id="table-L5"></tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- 3. Indangamanota Box (Izafunguka iyo umunyeshuri akanze) -->
+        <div class="report-card-wrapper" id="report-card-popup">
+            <div id="report-pdf-area">
+                <div class="report-header">
+                    <h2>REPUBULIKA Y'U RWANDA</h2>
+                    <h3>RWANDA TVET BOARD (RTB) REPORT CARD</h3>
+                    <p style="color:#64748b; margin-top:5px; font-weight: bold;">UMWAKA W'AMASHURI: 2026</p>
+                </div>
+                <div class="report-meta">
+                    <div><strong>Izina ry'Umunyeshuri:</strong> <span id="rep-name" style="color:#2563eb; font-weight:bold;">...</span></div>
+                    <div><strong>Ishami (Trade):</strong> <span id="rep-trade">...</span></div>
+                    <div><strong>Icyiciro (Level):</strong> <span id="rep-level" style="font-weight:bold;">...</span></div>
+                </div>
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Isomo (Module)</th>
+                            <th>Amanota Yabonye (%)</th>
+                            <th>Icyiciro (Grade)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="rep-table-body"></tbody>
+                </table>
+                <div style="margin-top: 25px; display:flex; justify-content:space-between; font-size:18px; border-top: 2px solid #e2e8f0; padding-top: 15px;">
+                    <div><strong>Impuzandengo (Average):</strong> <span id="rep-average" style="color:#10b981; font-weight:bold;">0%</span></div>
+                    <div><strong>Icyiciro cy'Amanota:</strong> <span id="rep-grade" style="font-weight:bold;">...</span></div>
+                </div>
+            </div>
+            <button class="btn-pdf" onclick="downloadReportPDF()">📥 Gakura Indangamanota nka PDF (Download)</button>
+        </div>
+
+    </main>
+
+    <script src="app.js"></script>
+    <script src="report.js"></script>
+</body>
+</html>

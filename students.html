@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Tracker - Abanyeshuri</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .trade-menu { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+        .trade-btn { background: #1e293b; color: #cbd5e1; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .trade-btn:hover { background: #334155; color: white; }
+        .trade-btn.active-trade { background: #3b82f6; color: white; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+        
+        .level-container { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .level-title { background: #0f172a; color: white; padding: 10px 15px; border-radius: 6px; font-size: 18px; margin-bottom: 15px; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🚀 AcademicTracker</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="students.html" class="active">Abanyeshuri</a></li>
+            <li><a href="marks.html">Amanota</a></li>
+            <li><a href="report-cards.html">Indangamanota</a></li>
+            <li><a href="past-papers.html">Past Papers</a></li>
+            <li><a href="announcements.html">Amatangazo</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="main-header">
+            <h1>Kwandika n'Itondekanya ry'Abanyeshuri</h1>
+            <p>Yandika umunyeshuri mushya, maze ukande kuri Trade mbanziriza ubonereho abanyeshuri bagabanyije mu ma Levels [1].</p>
+        </header>
+
+        <!-- Form Section -->
+        <section class="form-section">
+            <h2>Ifishi y'Umunyeshuri</h2>
+            <form id="student-form" style="margin-top: 15px;">
+                <div class="form-group">
+                    <label for="student-name">Izina Ryombi (Full Name)</label>
+                    <input type="text" id="student-name" placeholder="Ugereranyije: KEZA Alain" required>
+                </div>
+                <div class="form-group">
+                    <label for="student-trade">Ishami (Trade)</label>
+                    <select id="student-trade" required>
+                        <option value="">-- Hitamo Ishami --</option>
+                        <option value="SOD">Software Development (SOD)</option>
+                        <option value="TOR">Tourism Operations (TOR)</option>
+                        <option value="CSA">Computer Systems & Architecture (CSA)</option>
+                        <option value="ACC">Accounting (ACC)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="student-level">Icyiciro (Level)</label>
+                    <select id="student-level" required>
+                        <option value="">-- Hitamo Level --</option>
+                        <option value="L3">Level 3 (S4)</option>
+                        <option value="L4">Level 4 (S5)</option>
+                        <option value="L5">Level 5 (S6)</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn-submit">Bika Umunyeshuri</button>
+            </form>
+        </section>
+
+        <!-- Menu Tabs y'Amashami kuri Lists -->
+        <div class="trade-menu" style="margin-top: 40px;">
+            <button class="trade-btn" onclick="filterStudentLists('SOD')">💻 SOD List</button>
+            <button class="trade-btn" onclick="filterStudentLists('TOR')">🌍 TOR List</button>
+            <button class="trade-btn" onclick="filterStudentLists('CSA')">⚙️ CSA List</button>
+            <button class="trade-btn" onclick="filterStudentLists('ACC')">📊 ACC List</button>
+        </div>
+
+        <!-- Lists Area (Grouped by Level) -->
+        <div id="student-lists-area" style="display: none;">
+            <div class="level-container">
+                <div class="level-title">🎓 Level 3 (S4) Students</div>
+                <table class="styled-table">
+                    <thead><tr><th>#</th><th>Izina Ryombi</th><th>Ibikorwa</th></tr></thead>
+                    <tbody id="tbody-L3"></tbody>
+                </table>
+            </div>
+
+            <div class="level-container">
+                <div class="level-title">🎓 Level 4 (S5) Students</div>
+                <table class="styled-table">
+                    <thead><tr><th>#</th><th>Izina Ryombi</th><th>Ibikorwa</th></tr></thead>
+                    <tbody id="tbody-L4"></tbody>
+                </table>
+            </div>
+
+            <div class="level-container">
+                <div class="level-title">🎓 Level 5 (S6) Students</div>
+                <table class="styled-table">
+                    <thead><tr><th>#</th><th>Izina Ryombi</th><th>Ibikorwa</th></tr></thead>
+                    <tbody id="tbody-L5"></tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="students.js"></script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academic Tracker - Amanota</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .trade-menu { display: flex; gap: 15px; margin-bottom: 25px; flex-wrap: wrap; justify-content: center; }
+        .trade-btn { background: #1e293b; color: #cbd5e1; border: none; padding: 12px 25px; font-size: 16px; font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .trade-btn:hover { background: #334155; color: white; }
+        .trade-btn.active-trade { background: #3b82f6; color: white; box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3); }
+        .teacher-section { display: none; }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="logo">🚀 AcademicTracker</div>
+        <ul class="nav-links">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="students.html">Abanyeshuri</a></li>
+            <li><a href="marks.html" class="active">Amanota</a></li>
+            <li><a href="report-cards.html">Indangamanota</a></li>
+            <li><a href="past-papers.html">Past Papers</a></li>
+            <li><a href="announcements.html">Amatangazo</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <header class="main-header">
+            <h1>Kwinjiza Amanota (Uruhande rw'Umwarimu)</h1>
+            <p>Kanda kuri Trade mbanziriza, hanyuma uhitemo Level kugira ngo uhitemo abanyeshuri n'amasomo yabo.</p>
+        </header>
+
+        <!-- 1. Menu y'Amashami (Trade Tabs) -->
+        <div class="trade-menu">
+            <button class="trade-btn" onclick="selectTeacherTrade('SOD')">💻 Software Development (SOD)</button>
+            <button class="trade-btn" onclick="selectTeacherTrade('TOR')">🌐 Tourism (TOR)</button>
+            <button class="trade-btn" onclick="selectTeacherTrade('CSA')">⚙️ Systems Architecture (CSA)</button>
+            <button class="trade-btn" onclick="selectTeacherTrade('ACC')">📊 Accounting (ACC)</button>
+        </div>
+
+        <!-- 2. Ifishi y'Amanota (Izafunguka iyo ishami ryanze) -->
+        <section class="form-section teacher-section" id="marks-teacher-box">
+            <h2 id="form-trade-title">Ifishi y'Amanota</h2>
+            <form id="marks-form" style="margin-top: 15px;">
+                
+                <!-- Level Filter -->
+                <div class="form-group">
+                    <label for="level-select">1. Hitamo Icyiciro (Level)</label>
+                    <select id="level-select" required disabled>
+                        <option value="">-- Hitamo Level --</option>
+                        <option value="L3">Level 3 (S4)</option>
+                        <option value="L4">Level 4 (S5)</option>
+                        <option value="L5">Level 5 (S6)</option>
+                    </select>
+                </div>
+
+                <!-- Student Select (Yunguruye na Trade + Level) -->
+                <div class="form-group">
+                    <label for="student-select">2. Hitamo Umunyeshuri</label>
+                    <select id="student-select" required disabled>
+                        <option value="">-- Banza uhitemo Level --</option>
+                    </select>
+                </div>
+
+                <!-- Subject Select (Bizaza hakurikijwe Trade + Level) -->
+                <div class="form-group">
+                    <label for="subject-select">3. Hitamo Isomo (Module)</label>
+                    <select id="subject-select" required disabled>
+                        <option value="">-- Banza uhitemo Level --</option>
+                    </select>
+                </div>
+
+                <!-- Marks Input -->
+                <div class="form-group">
+                    <label for="student-marks">4. Amanota (%)</label>
+                    <input type="number" id="student-marks" min="0" max="100" placeholder="0 - 100" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Bika Amanota (Save)</button>
+            </form>
+        </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script src="mark.js"></script>
+</body>
+</html>
